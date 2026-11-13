@@ -52,6 +52,28 @@ SEARXNG_URL=http://127.0.0.1:8080 .venv/bin/python server.py --host 0.0.0.0 --po
 
 Возвращает JSON: `number_of_results` + список `{title, url, content, engine}`.
 
+## Windows
+
+Обёртка — чистый Python, работает на Windows без изменений.
+
+**Как клиент** (обычный случай): ничего устанавливать не нужно — в MCP-клиенте
+укажите URL сервера, например `http://10.192.100.201:8765/mcp`.
+
+**Запуск обёртки на Windows:**
+
+```powershell
+git clone https://github.com/strikebox/searxng-mcp-lite.git
+cd searxng-mcp-lite
+uv venv --python 3.12 .venv
+.venv\Scripts\pip install -r requirements.txt
+$env:SEARXNG_URL="http://10.192.100.201:8080"
+.venv\Scripts\python server.py --host 0.0.0.0 --port 8765
+```
+
+Нюансы:
+- при первом запуске разрешите доступ в сети в брандмауэре Windows;
+- для автозапуска вместо systemd — Планировщик заданий или NSSM.
+
 ## systemd (пример)
 
 ```ini
